@@ -21,6 +21,12 @@
 - (void)paymentView:(PTKView *)paymentView withCard:(PTKCard *)card isValid:(BOOL)valid;
 @end
 
+typedef NS_ENUM(NSUInteger, PTKViewEntryState) {
+    PTKViewEntryStateCardNumber,
+    PTKViewEntryStateCVC,
+    PTKViewEntryStateMeta,
+};
+
 @interface PTKView : UIView
 
 - (BOOL)isValid;
@@ -30,6 +36,7 @@
 @property (nonatomic, readonly) PTKCardExpiry *cardExpiry;
 @property (nonatomic, readonly) PTKCardCVC *cardCVC;
 @property (nonatomic, readonly) PTKAddressZip *addressZip;
+@property (assign, nonatomic, readonly) PTKViewEntryState entryState;
 
 @property IBOutlet UIView *innerView;
 @property IBOutlet UIView *clipView;
@@ -39,5 +46,7 @@
 @property IBOutlet UIImageView *placeholderView;
 @property (nonatomic, weak) id <PTKViewDelegate> delegate;
 @property (readonly) PTKCard *card;
+
+- (void)transitionToState:(PTKViewEntryState) state;
 
 @end

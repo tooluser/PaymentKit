@@ -53,6 +53,8 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 @property (nonatomic) PTKCardExpiry *cardExpiry;
 @property (nonatomic) PTKCardCVC *cardCVC;
 @property (nonatomic) PTKAddressZip *addressZip;
+@property (assign, nonatomic, readwrite) PTKViewEntryState entryState;
+
 @end
 
 #pragma mark -
@@ -198,8 +200,19 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
 #pragma mark - State
 
+- (void)transitionToState:(PTKViewEntryState) state {
+    if (state == PTKViewEntryStateCardNumber) {
+        [self stateCardNumber];
+    } else if (state == PTKViewEntryStateCVC) {
+        [self stateCardCVC];
+    } else if (state == PTKViewEntryStateMeta) {
+        [self stateMeta];
+    }
+}
+
 - (void)stateCardNumber
 {
+    self.entryState = PTKViewEntryStateCardNumber;
     if (!_isInitialState) {
         // Animate left
         _isInitialState = YES;
@@ -237,6 +250,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
 - (void)stateMeta
 {
+    self.entryState = PTKViewEntryStateMeta;
     _isInitialState = NO;
 
     CGSize cardNumberSize;
@@ -289,6 +303,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
 - (void)stateCardCVC
 {
+    self.entryState = PTKViewEntryStateCVC;
     [self.cardCVCField becomeFirstResponder];
 }
 
