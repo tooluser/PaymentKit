@@ -249,16 +249,16 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
     if ([self.cardNumber.formattedString respondsToSelector:@selector(sizeWithAttributes:)]) {
-        NSDictionary *attributes = @{NSFontAttributeName: DefaultBoldFont};
+        NSDictionary *attributes = @{NSFontAttributeName: self.cardNumberField.font};
 
         cardNumberSize = [self.cardNumber.formattedString sizeWithAttributes:attributes];
         lastGroupSize = [self.cardNumber.lastGroup sizeWithAttributes:attributes];
     } else {
-        cardNumberSize = [self.cardNumber.formattedString sizeWithFont:DefaultBoldFont];
+        cardNumberSize = [self.cardNumber.formattedString sizeWithFont:self.cardNumberField.font];
         lastGroupSize = [self.cardNumber.lastGroup sizeWithFont:DefaultBoldFont];
     }
 #else
-    NSDictionary *attributes = @{NSFontAttributeName: DefaultBoldFont};
+    NSDictionary *attributes = @{NSFontAttributeName: self.cardNumberField.font};
 
     cardNumberSize = [self.cardNumber.formattedString sizeWithAttributes:attributes];
     lastGroupSize = [self.cardNumber.lastGroup sizeWithAttributes:attributes];
