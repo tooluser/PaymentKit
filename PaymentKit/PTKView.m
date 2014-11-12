@@ -7,9 +7,9 @@
 //
 
 #define RGB(r,g,b) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1.0f]
-#define DarkGreyColor RGB(0,0,0)
-#define RedColor RGB(253,0,17)
-#define DefaultBoldFont [UIFont boldSystemFontOfSize:17]
+#define DarkGreyColor RGB(50,50,50)
+#define RedColor RGB(242,36,46)
+#define DefaultBoldFont [UIFont fontWithName:@"ProximaNova-Light" size:17]
 
 #define kPTKViewPlaceholderViewAnimationDuration 0.25
 
